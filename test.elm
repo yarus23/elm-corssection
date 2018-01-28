@@ -1,5 +1,6 @@
 import Html exposing (..)
 import Html.Events exposing (onClick)
+import Html.Attributes exposing (..)
 import Math exposing(..)
 import Data exposing(..)
 
@@ -34,13 +35,17 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (toString  (getItemByCurrent Cu Ground Three 101)) ]
-    , button [ onClick Increment ] [ text "+" ]
-    ]
-
+  Html.form []
+  [
+    label []
+      [ select [] [ option [] [ text "Алюминий"], option [] [ text "Медь"] ]
+      , text "Тип кабеля"
+      ]
+    , label []
+      [ input [ type_ "number"] []
+      , text "Длина кабеля, м" ]
+  ]
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none    
+    Sub.none
